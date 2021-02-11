@@ -21,10 +21,18 @@ function addProjectDetails(e) {
 	// Prevent following the link
 	e.preventDefault();
 
+	var url = $.get("/project/" + idNumber, callBackFn);
+
 	// Get the div ID, e.g., "project3"
 	var projectID = $(this).closest('.project').attr('id');
 	// get rid of 'project' from the front of the id 'project3'
 	var idNumber = projectID.substr('project'.length);
 
+	$.get("http://localhost:3000/project/" + idNumber, callback);
 	console.log("User clicked on project " + idNumber);
+}
+
+function callback(result){
+	e.preventDefault();
+	$('#project' + result.id + '.details').html(result.summary);
 }
